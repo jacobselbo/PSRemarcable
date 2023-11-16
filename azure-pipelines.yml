@@ -1,0 +1,15 @@
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+jobs:
+- job: Build
+  steps:
+  - task: PowerShell@2
+    inputs:
+      filePath: 'build-pipelines.ps1'
+      pwsh: true
+  - publish: $(Build.ArtifactStagingDirectory)
+    artifact: Remarcable Powershell Module
