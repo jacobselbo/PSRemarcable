@@ -1,4 +1,4 @@
-class Address {
+class Address : Serializable {
     [string] $Field1
     [string] $Field2
     [string] $City
@@ -25,19 +25,5 @@ class Address {
         $this.Country = $Country
     }
 
-    Address($InputTable) {
-        foreach ($Row in $InputTable.GetEnumerator()) {
-            $this.($this.Serialization.($Row.Name)) = $Row.Value
-        }
-    }
-
-    [hashtable] Seralize() {
-        $Result = @{}
-
-        foreach ($Row in $this.Serialization.GetEnumerator()) {
-            $Result.($Row.Name) = $this.($Row.Value)
-        }
-
-        return $Result
-    }
+    Address([hashtable] $InputTable) : base($InputTable) { }
 }

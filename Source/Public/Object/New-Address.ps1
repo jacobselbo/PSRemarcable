@@ -26,7 +26,7 @@
     .PARAMETER ShippingNote
         Delivery Location. Such as: Electric Trailer
 #>
-Function New-PhaseCode {
+Function New-Address {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]

@@ -23,7 +23,7 @@
     .PARAMETER UnitOfMeasurement
         Typical values are 1, 100, 1000, E, M, C. For example, conduit is typically sold per 100ft. If the the average price is $200/100ft. The price will be 200 and UOM will be 100
 #>
-Function New-PriceFileItemObject {
+Function New-PriceFileItem {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]

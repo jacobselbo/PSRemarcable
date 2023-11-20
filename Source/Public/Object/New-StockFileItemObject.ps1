@@ -14,7 +14,7 @@
     .PARAMETER BranchStockQuantity
         Local branch in-store stock quantity
 #>
-Function New-PriceFileItemObject {
+Function New-StockFileItem {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -30,6 +30,6 @@ Function New-PriceFileItemObject {
         $BranchStockQuantity
     )
     Process {
-        return [PriceFileItem]::new($SKU, $StockQuantity, $BranchStockQuantity)
+        return [StockFileItem]::new($SKU, $StockQuantity, $BranchStockQuantity)
     }
 }

@@ -1,10 +1,19 @@
-class PriceFileItem {
+class PriceFileItem : Serializable {
     [float] $Price
     [string] $StockNumber
     [string] $UnitOfMeasurement
     [string] $Description
     [string] $SKU
     [string] $UPC
+
+    hidden $Serialization = @{
+        price = "Price"
+        uom = "UnitOfMeasurement"
+        upc = "UPC"
+        description = "Description"
+        stock_num = "StockNumber"
+        sku = "SKU"
+    }
 
     PriceFileItem($StockNumber, $Description, $SKU, $UPC, $Price, $UnitOfMeasurement) {
         $this.StockNumber = $StockNumber
@@ -15,14 +24,5 @@ class PriceFileItem {
         $this.UnitOfMeasurement = $UnitOfMeasurement
     }
 
-    [hashtable] Seralize() {
-        return @{
-            price = $this.Price
-            uom = $this.UnitOfMeasurement
-            upc = $this.UPC
-            description = $this.Description
-            stock_num = $this.StockNumber
-            sku = $this.SKU
-        }
-    }
+    PriceFileItem([hashtable] $InputTable) : base($InputTable) { }
 }

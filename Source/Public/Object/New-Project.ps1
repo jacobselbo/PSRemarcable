@@ -146,7 +146,7 @@ Function New-Project {
         $Project = [Project]::new($Status, $ProjectName, $MainJobNumber)
 
         $PSBoundParameters.Keys.ForEach{
-            $ColumnObject.$_ = $PSBoundParameters[$_]
+            $Project.$_ = $PSBoundParameters[$_]
         }
 
         return $Project

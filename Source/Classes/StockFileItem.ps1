@@ -1,4 +1,4 @@
-class StockFileItem {
+class StockFileItem : Serializable {
     [int] $StockQuantity
     [int] $BranchStockQuantity
     [string] $SKU
@@ -15,19 +15,5 @@ class StockFileItem {
         $this.BranchStockQuantity = $BranchStockQuantity
     }
 
-    StockFileItem($InputTable) {
-        foreach ($Row in $InputTable.GetEnumerator()) {
-            $this.($this.Serialization.($Row.Name)) = $Row.Value
-        }
-    }
-
-    [hashtable] Seralize() {
-        $Result = @{}
-
-        foreach ($Row in $this.Serialization.GetEnumerator()) {
-            $Result.($Row.Name) = $this.($Row.Value)
-        }
-
-        return $Result
-    }
+    StockFileItem([hashtable] $InputTable) : base($InputTable) { }
 }

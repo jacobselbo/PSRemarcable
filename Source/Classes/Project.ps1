@@ -77,13 +77,13 @@ class Project {
 
     Project($InputTable) {
         foreach ($Row in $InputTable.GetEnumerator()) {
-            $SeralizedName = $Row.Name
-            $ClassName = $this.Serialization.$SeralizedName
+            $SerializedName = $Row.Name
+            $ClassName = $this.Serialization.$SerializedName
             $InputValue = $Row.Value
 
-            if ($SeralizedName -eq "material_phase_code" -or $SeralizedName -eq "labor_phase_code") {
+            if ($SerializedName -eq "material_phase_code" -or $SerializedName -eq "labor_phase_code") {
                 $this.$ClassName = @($InputValue | ForEach-Object { [PhaseCode]::new($_) })
-            } elseif ($SeralizedName -eq "address") {
+            } elseif ($SerializedName -eq "address") {
                 $this.$ClassName = [Address]::new($InputValue)
             } else {
                 $this.$ClassName = $InputValue
@@ -91,20 +91,20 @@ class Project {
         }
     }
 
-    [hashtable] Seralize() {
+    [hashtable] Serialize() {
         $Result = @{}
 
         foreach ($Row in $this.Serialization.GetEnumerator()) {
             if ($null -ne $this.($Row.Value)) {
-                $SeralizedName = $Row.Name
+                $SerializedName = $Row.Name
                 $ClassName = $Row.Value
 
-                if ($SeralizedName -eq "material_phase_code" -or $SeralizedName -eq "labor_phase_code") {
-                    $Result.$SeralizedName = @($this.$ClassName | ForEach-Object {$_.Seralize() })
-                } elseif ($SeralizedName -eq "address") {
-                    $Result.$SeralizedName = $this.$ClassName.Seralize()
+                if ($SerializedName -eq "material_phase_code" -or $SerializedName -eq "labor_phase_code") {
+                    $Result.$SerializedName = @($this.$ClassName | ForEach-Object {$_.Serialize() })
+                } elseif ($SerializedName -eq "address") {
+                    $Result.$SerializedName = $this.$ClassName.Serialize()
                 } else {
-                    $Result.$SeralizedName = $this.$ClassName
+                    $Result.$SerializedName = $this.$ClassName
                 }
             }
         }

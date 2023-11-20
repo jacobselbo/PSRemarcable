@@ -1,4 +1,4 @@
-class PhaseCode {
+class PhaseCode : Serializable {
     [string] $Code
     [string] $Name
 
@@ -12,19 +12,5 @@ class PhaseCode {
         $this.Name = $Name
     }
 
-    PhaseCode($InputTable) {
-        foreach ($Row in $InputTable.GetEnumerator()) {
-            $this.($this.Serialization.($Row.Name)) = $Row.Value
-        }
-    }
-
-    [hashtable] Seralize() {
-        $Result = @{}
-
-        foreach ($Row in $this.Serialization.GetEnumerator()) {
-            $Result.($Row.Name) = $this.($Row.Value)
-        }
-
-        return $Result
-    }
+    PhaseCode([hashtable] $InputTable) : base($InputTable) { }
 }
