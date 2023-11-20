@@ -11,7 +11,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=68
 #>
-Function Get-PriceFile {
+Function Import-Project {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -26,7 +26,7 @@ Function Get-PriceFile {
         $script:RemarcableClient.DoesAPITokenNeedRefresh()
 
         $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/CreateUpdateProject/"
-        $Parameters = $Project.Seralize()
+        $Parameters = $Project.Serialize()
         $Parameters.token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
         $Parameters.account_email = $script:RemarcableClient.APICredential.UserName
     }

@@ -3,7 +3,7 @@
         Retrieve a list of PO items
 
     .DESCRIPTION
-        Retrieve a lsit of PO items
+        Retrieve a list of PO items
 
     .PARAMETER ProjectID
         ID of project to retrieve POs for

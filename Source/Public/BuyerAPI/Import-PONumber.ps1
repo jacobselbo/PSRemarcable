@@ -72,7 +72,7 @@ Function Import-PONumber {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET | Get-PaginationResult
+            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method POST
         } catch {
             Write-Error "Failed to send Remarcable PO Number"
             Write-Error $_

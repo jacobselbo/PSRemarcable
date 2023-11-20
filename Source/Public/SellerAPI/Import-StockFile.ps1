@@ -1,9 +1,9 @@
 <#
     .SYNOPSIS
-        Create new price file items or update existing ones
+        Create new stock file items or update existing ones
 
     .DESCRIPTION
-        Create new price file items or update existing ones
+        Create new stock file items or update existing ones
 
     .PARAMETER CompanyBranchID
         Seller company branch Remarcable ID
@@ -14,7 +14,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=213
 #>
-Function Get-PriceFile {
+Function Import-StockFile {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -37,7 +37,7 @@ Function Get-PriceFile {
             token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
             account_email = $script:RemarcableClient.APICredential.UserName
             company_branch_id = $CompanyBranchID
-            json_data = @($StockFileItems | ForEach-Object ${ $_.Seralize() })
+            json_data = @($StockFileItems | ForEach-Object ${ $_.Serialize() })
         }
     }
     Process {

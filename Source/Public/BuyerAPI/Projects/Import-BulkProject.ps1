@@ -11,7 +11,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=103
 #>
-Function Get-PriceFile {
+Function Import-BulkProject {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]
@@ -30,7 +30,7 @@ Function Get-PriceFile {
             token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
             account_email = $script:RemarcableClient.APICredential.UserName
             company_branch_id = $CompanyBranchID
-            json_data = @($Projects | ForEach-Object ${ $_.Seralize() })
+            json_data = @($Projects | ForEach-Object { $_.Serialize() })
         }
     }
     Process {

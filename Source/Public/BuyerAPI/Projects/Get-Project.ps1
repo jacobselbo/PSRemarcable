@@ -8,6 +8,9 @@
     .PARAMETER ProjectID
         Remarcable Project ID
 
+    .PARAMETER AsClass
+        Returns Project Class instead of Raw data. Perferable if Import-BulkProject or Import-Project are going to be used with simple data changes.
+
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=67
 #>
@@ -16,7 +19,10 @@ Function Get-Project {
     param(
         [Parameter(Mandatory = $true)]
         [string]
-        $ProjectID
+        $ProjectID,
+
+        [switch]
+        $AsClass
     )
     Begin {
         if ($null -eq $script:RemarcableClient) {
@@ -34,7 +40,13 @@ Function Get-Project {
     }
     Process {
         try {
-            Return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET
+            if ($AsClass) {
+                $Data = Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET
+
+                Return [Project]::new($Data)
+            } else {
+                Return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET
+            }
         } catch {
             Write-Error "Failed to retrieve Remarcable Project"
             Write-Error $_

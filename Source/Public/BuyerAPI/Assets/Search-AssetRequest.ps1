@@ -32,7 +32,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=235
 #>
-Function Get-AssetRequest {
+Function Search-AssetRequest {
     [CmdletBinding()]
     param (
         [int]

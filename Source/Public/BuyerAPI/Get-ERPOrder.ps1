@@ -11,7 +11,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=73
 #>
-Function Get-ProjectPOTTD {
+Function Get-ERPOrder {
     [CmdletBinding()]
     param (
         [string]

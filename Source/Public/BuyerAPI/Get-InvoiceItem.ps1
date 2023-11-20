@@ -20,7 +20,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=174
 #>
-Function Get-ProjectPOTTD {
+Function Get-InvoiceItem {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = "WithSONumbers")]
@@ -45,7 +45,7 @@ Function Get-ProjectPOTTD {
 
         $script:RemarcableClient.DoesAPITokenNeedRefresh()
 
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListSOItem/"
+        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListInvoiceItem/"
         $Parameters = @{
             token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
             account_email = $script:RemarcableClient.APICredential.UserName

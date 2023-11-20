@@ -19,7 +19,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=70
 #>
-Function Get-PriceFile {
+Function Get-PriceFileItemPrice {
     [CmdletBinding()]
     param (
         [string]
@@ -38,7 +38,7 @@ Function Get-PriceFile {
 
         $script:RemarcableClient.DoesAPITokenNeedRefresh()
 
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/GetBuyerPriceFileItems/"
+        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/GetBuyerPriceFileItemPrice/"
         $Body = @{
             token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
             account_email = $script:RemarcableClient.APICredential.UserName

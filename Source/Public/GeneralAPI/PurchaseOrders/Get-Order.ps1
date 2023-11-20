@@ -14,7 +14,7 @@
     .LINK
         https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=65
 #>
-Function Search-OrderItem {
+Function Get-Order {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true, ParameterSetName = "WithPOIDS")]
@@ -31,7 +31,7 @@ Function Search-OrderItem {
 
         $script:RemarcableClient.DoesAPITokenNeedRefresh()
 
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListPOItem/"
+        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/RetrievePO/"
         $Parameters = @{
             token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
             account_email = $script:RemarcableClient.APICredential.UserName
