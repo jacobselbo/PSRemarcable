@@ -1,4 +1,3 @@
 @{
-    Path              = "PSRemarcable.psd1"
-    VersionedOutputDirectory = $true
+    Path                        = "PSRemarcable.psd1"
 }

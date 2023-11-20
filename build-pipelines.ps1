@@ -4,7 +4,7 @@ Install-Module PSScriptAnalyzer, ModuleBuilder -ErrorAction Stop -Force
 
 ## Build module
 Write-Output "Beginning module build"
-$Module = Build-Module -SourcePath .\Source\ -OutputDirectory "$ENV:BUILD_BINARIESDIRECTORY\PSRemarcable"
+$Module = Build-Module -SourcePath .\Source\ -OutputDirectory "$ENV:BUILD_BINARIESDIRECTORY\PSRemarcable" -UnversionedOutputDirectory -Passthru
 Write-Output "Built module at version: $($Module.Version)"
 
 ## Lint built psm1
