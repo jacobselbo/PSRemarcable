@@ -97,6 +97,9 @@
 
     .PARAMETER AllowDirectPurchase
         When true, field user to send order directly to suppliers.
+
+    .PARAMETER WBSCode1Options
+        WBS Codes.
 #>
 Function New-Project {
     [CmdletBinding()]
@@ -140,7 +143,10 @@ Function New-Project {
         [string] $ToolCostPONumber,
         [int] $CurrentJobPONumber,
         [bool] $TaxExempt,
-        [bool] $AllowDirectPurchase
+        [bool] $AllowDirectPurchase,
+
+        # Get-Project Paramters
+        [WBSCode[]] $WBSCode1Options
     )
     Process {
         $Project = [Project]::new($Status, $ProjectName, $MainJobNumber)

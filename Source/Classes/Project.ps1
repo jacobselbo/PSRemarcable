@@ -34,6 +34,9 @@ class Project {
     [bool] $TaxExempt
     [bool] $AllowDirectPurchase
 
+    # Get-Project
+    [WBSCode[]] $WBSCode1Options
+
     hidden $Serialization = @{
         status = "Status"
         project_name = "ProjectName"
@@ -67,6 +70,8 @@ class Project {
         current_job_po_number = "CurrentJobPONumber"
         tax_exempt = "TaxExempt"
         allow_direct_pruchase = "AllowDirectPurchase"
+
+        wbs_code_1_options = "WBSCode1Options"
     }
 
     Project($Status, $ProjectName, $MainJobNumber) {
@@ -83,6 +88,8 @@ class Project {
 
             if ($SerializedName -eq "material_phase_code" -or $SerializedName -eq "labor_phase_code") {
                 $this.$ClassName = @($InputValue | ForEach-Object { [PhaseCode]::new($_) })
+            } else if ($SerializedName -eq "wbs_code_1_options") {
+                $this.$ClassName = @($InputValue | ForEach-Object { [WBSCode]::new($_) })
             } elseif ($SerializedName -eq "address") {
                 $this.$ClassName = [Address]::new($InputValue)
             } else {
@@ -99,7 +106,7 @@ class Project {
                 $SerializedName = $Row.Name
                 $ClassName = $Row.Value
 
-                if ($SerializedName -eq "material_phase_code" -or $SerializedName -eq "labor_phase_code") {
+                if ($SerializedName -eq "material_phase_code" -or $SerializedName -eq "labor_phase_code" -or $SerializedName -eq "wbs_code_1_options") {
                     $Result.$SerializedName = @($this.$ClassName | ForEach-Object {$_.Serialize() })
                 } elseif ($SerializedName -eq "address") {
                     $Result.$SerializedName = $this.$ClassName.Serialize()
