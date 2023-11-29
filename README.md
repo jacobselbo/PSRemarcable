@@ -48,6 +48,7 @@ Powershell documentation can be found in `/Docs/`
 | Search-Project | Gets a list of projects from fields |
 | Import-Project | Creates or updates a project in Remarcable |
 | Import-BulkProject | Creates or updates a list of projects in Remarcable |
+| Import-ProjectList | Creates or updates a project list in Remarcable |
 | Get-ERPOrder | Gets account system order information |
 | Get-InvoiceItem | Gets a list of invoice items |
 | Get-SalesOrderItem | Gets a list of SO items |
@@ -61,3 +62,5 @@ Powershell documentation can be found in `/Docs/`
 | New-PriceFileItem | Creates a price file object |
 | New-StockFileItem | Creats a stock file object |
 | New-Project | Creates a project object |
+| New-ProjectList | Creates a project list object |
+| New-ProjectListItem | Creates a list item for a project list |

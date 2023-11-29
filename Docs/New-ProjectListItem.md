@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-ProjectListItem
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a Project List Item.
 
 ## SYNTAX
 
@@ -22,22 +22,17 @@ New-ProjectListItem [-Description] <String> [[-Comments] <String>] [[-Remarcable
  [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $ProjectListItem = New-ProjectListItem -Description "Item"
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Comments
-{{ Fill Comments Description }}
+Item Comments.
 
 ```yaml
 Type: String
@@ -52,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -CostCode
-{{ Fill CostCode Description }}
+Item cost code.
 
 ```yaml
 Type: String
@@ -67,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -Description
-{{ Fill Description Description }}
+Item Description.
 
 ```yaml
 Type: String
@@ -82,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -IsSubstituteAllowed
-{{ Fill IsSubstituteAllowed Description }}
+Item attribute to allow substitution.
 
 ```yaml
 Type: SwitchParameter
@@ -97,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -LayerNumber
-{{ Fill LayerNumber Description }}
+Only used for wire spool.
 
 ```yaml
 Type: Int32
@@ -112,7 +107,7 @@ Accept wildcard characters: False
 ```
 
 ### -LayerTag
-{{ Fill LayerTag Description }}
+Only used for wire spool.
 
 ```yaml
 Type: String
@@ -127,7 +122,7 @@ Accept wildcard characters: False
 ```
 
 ### -ManufacturerName
-{{ Fill ManufacturerName Description }}
+This string has to match exact manufacturer name on Remarcable. Otherwise, manufacturer will be added as a comment.
 
 ```yaml
 Type: String
@@ -142,7 +137,7 @@ Accept wildcard characters: False
 ```
 
 ### -ManufacturerStockNumber
-{{ Fill ManufacturerStockNumber Description }}
+This is the manufacturer stock number value.
 
 ```yaml
 Type: String
@@ -157,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -PhaseCode
-{{ Fill PhaseCode Description }}
+Item phase code.
 
 ```yaml
 Type: String
@@ -172,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -Quantity
-{{ Fill Quantity Description }}
+Item quantity. This is the quantity pre-filled for direct purchase.
 
 ```yaml
 Type: Int32
@@ -187,7 +182,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReleasedQuantity
-{{ Fill ReleasedQuantity Description }}
+This is the quantity already purchased or released.
 
 ```yaml
 Type: Int32
@@ -202,7 +197,7 @@ Accept wildcard characters: False
 ```
 
 ### -RemarcableSKU
-{{ Fill RemarcableSKU Description }}
+Remarcable item code. Needed to pull Remarcable image and item description.
 
 ```yaml
 Type: String
@@ -217,7 +212,7 @@ Accept wildcard characters: False
 ```
 
 ### -SpoolNumber
-{{ Fill SpoolNumber Description }}
+Only used for wire spool.
 
 ```yaml
 Type: Int32
@@ -232,7 +227,7 @@ Accept wildcard characters: False
 ```
 
 ### -SpoolTag
-{{ Fill SpoolTag Description }}
+Only used for wire spool.
 
 ```yaml
 Type: String
@@ -247,7 +242,7 @@ Accept wildcard characters: False
 ```
 
 ### -TotalQuantity
-{{ Fill TotalQuantity Description }}
+This is the item overall quantity.
 
 ```yaml
 Type: Int32
@@ -262,7 +257,7 @@ Accept wildcard characters: False
 ```
 
 ### -UPCGeneric
-{{ Fill UPCGeneric Description }}
+Used to pull Remarcable image and description in absence of Remarcable SKU.
 
 ```yaml
 Type: Int32
@@ -277,7 +272,7 @@ Accept wildcard characters: False
 ```
 
 ### -Unit
-{{ Fill Unit Description }}
+EA / FT.
 
 ```yaml
 Type: String
@@ -292,7 +287,7 @@ Accept wildcard characters: False
 ```
 
 ### -UnitOfMeasurement
-{{ Fill UnitOfMeasurement Description }}
+1, 100, 1000.
 
 ```yaml
 Type: Int32
@@ -307,7 +302,7 @@ Accept wildcard characters: False
 ```
 
 ### -UnitPrice
-{{ Fill UnitPrice Description }}
+Item unit price per each.
 
 ```yaml
 Type: Single
@@ -322,7 +317,7 @@ Accept wildcard characters: False
 ```
 
 ### -WBSCode1
-{{ Fill WBSCode1 Description }}
+Item wbs code.
 
 ```yaml
 Type: String
@@ -337,7 +332,7 @@ Accept wildcard characters: False
 ```
 
 ### -WireNumber
-{{ Fill WireNumber Description }}
+Only used for wire spool.
 
 ```yaml
 Type: Int32
@@ -352,7 +347,7 @@ Accept wildcard characters: False
 ```
 
 ### -WireTag
-{{ Fill WireTag Description }}
+Only used for wire spool.
 
 ```yaml
 Type: String
@@ -375,7 +370,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
-
-## RELATED LINKS
+### ProjectListItem

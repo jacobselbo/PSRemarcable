@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-PhaseCode
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a Phase Code Object for Project use.
 
 ## SYNTAX
 
@@ -16,22 +16,17 @@ schema: 2.0.0
 New-PhaseCode [-Code] <String> [-Name] <String> [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-PhaseCode -Code "128D" -Name "Test"
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Code
-{{ Fill Code Description }}
+Phase code.
 
 ```yaml
 Type: String
@@ -46,7 +41,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-{{ Fill Name Description }}
+Name of phase code.
 
 ```yaml
 Type: String
@@ -69,7 +64,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
-
-## RELATED LINKS
+### PhaseCode

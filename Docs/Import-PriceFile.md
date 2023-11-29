@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-PriceFile
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Create new price file items or update existing ones.
 
 ## SYNTAX
 
@@ -17,22 +17,18 @@ Import-PriceFile [-PriceFileID] <String> [-BuyerCompanyID] <String> [-PriceFileI
  [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $PriceFileItem = New-PriceFileItem -StockNumber "S128382" -Description "Test" -SKU "128382" -UPC "123828" -Price 123.1 -UnitOfMeasurement "100"
+PS C:\> Import-PriceFile -PriceFileID "af231820-1014-49bf-a842-824c2200cddf" -BuyerCompanyID "10168"
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -BuyerCompanyID
-{{ Fill BuyerCompanyID Description }}
+Buying company Remarcable ID. Seller company can obtain this ID from the price file update email on price file page.
 
 ```yaml
 Type: String
@@ -47,7 +43,7 @@ Accept wildcard characters: False
 ```
 
 ### -PriceFileID
-{{ Fill PriceFileID Description }}
+Remarcable Price File ID. Buying company can obtain this ID by calling the List Price File API. Seller company can obtain this ID from the price file update email on price file page
 
 ```yaml
 Type: String
@@ -62,7 +58,7 @@ Accept wildcard characters: False
 ```
 
 ### -PriceFileItems
-{{ Fill PriceFileItems Description }}
+List of PriceFileItem Objects. Use `New-PriceFileItem`
 
 ```yaml
 Type: PriceFileItem[]
@@ -85,7 +81,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+{
+    "detail": "'We are processing your file. You will get an email notification once we are fully complete."
+}
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=212

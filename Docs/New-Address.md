@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-Address
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates an Address object for Project use.
 
 ## SYNTAX
 
@@ -17,22 +17,17 @@ New-Address [-Field1] <String> [[-Field2] <String>] [-City] <String> [-State] <S
  [-ZIP] <String> [[-ShippingNote] <String>] [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-Address -Field1 "123 Main St." -City "Noblesville" -State "IN" -ZIP "46062" -Country "USA"
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -City
-{{ Fill City Description }}
+City name.
 
 ```yaml
 Type: String
@@ -47,7 +42,7 @@ Accept wildcard characters: False
 ```
 
 ### -Country
-{{ Fill Country Description }}
+Country of Address. Avaiable options are "USA", "Canada".
 
 ```yaml
 Type: String
@@ -63,7 +58,7 @@ Accept wildcard characters: False
 ```
 
 ### -Field1
-{{ Fill Field1 Description }}
+Street Number and Address.
 
 ```yaml
 Type: String
@@ -78,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Field2
-{{ Fill Field2 Description }}
+Apartment or Suite #.
 
 ```yaml
 Type: String
@@ -93,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -ShippingNote
-{{ Fill ShippingNote Description }}
+Delivery Location. Such as: Electric Trailer.
 
 ```yaml
 Type: String
@@ -108,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -State
-{{ Fill State Description }}
+State Abbreviation. i.e. "NY", "CA", "OH", "IN".
 
 ```yaml
 Type: String
@@ -123,7 +118,7 @@ Accept wildcard characters: False
 ```
 
 ### -ZIP
-{{ Fill ZIP Description }}
+5 digit USPS Postal ZIP code.
 
 ```yaml
 Type: String
@@ -146,7 +141,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
-
-## RELATED LINKS
+### Address

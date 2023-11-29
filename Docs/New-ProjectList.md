@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-ProjectList
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a new project list object.
 
 ## SYNTAX
 
@@ -17,22 +17,18 @@ New-ProjectList [-ListName] <String> [[-ParentListName] <String>] [-ListType] <S
  [-ProjectListItems] <ProjectListItem[]> [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $ProjectListItem = New-ProjectListItem -Description "Item"
+PS C:\> $ProjectList = New-ProjectList -ListName "List" -ProjectListItems $ProjectListItem
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ListName
-{{ Fill ListName Description }}
+The name of your list. This name will be used as a unique key for the list. In other words, if you send multiple lists with the same name, Remarcable will either aggregate all items or only accept the last list (depending on setting).
 
 ```yaml
 Type: String
@@ -47,7 +43,7 @@ Accept wildcard characters: False
 ```
 
 ### -ListType
-{{ Fill ListType Description }}
+Valid values are "default", "scheduling". If scheduling is used, the system will not search the list under main search library.
 
 ```yaml
 Type: String
@@ -63,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -ParentListName
-{{ Fill ParentListName Description }}
+If you wish to create a sub-list with a parent, you can pass in a parent list name.
 
 ```yaml
 Type: String
@@ -78,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectListItems
-{{ Fill ProjectListItems Description }}
+You can pass a list of project list you want to create, append, or overwrite.
 
 ```yaml
 Type: ProjectListItem[]
@@ -101,7 +97,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
-
-## RELATED LINKS
+### ProjectList

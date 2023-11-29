@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-ProjectList
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a project list and adds items to list on Remarcable
 
 ## SYNTAX
 
@@ -17,22 +17,19 @@ Import-ProjectList [[-ProjectID] <String>] [-JobNumber] <String> [[-ProjectLists
  [-OverwriteExisting] [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $ProjectListItem = New-ProjectListItem -Description "Item"
+PS C:\> $ProjectList = New-ProjectList -ListName "List" -ProjectListItems $ProjectListItem
+PS C:\> Import-ProjectList -JobNumber "128382" -ProjectLists $ProjectList
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -JobNumber
-{{ Fill JobNumber Description }}
+Job number of project to import project list.
 
 ```yaml
 Type: String
@@ -47,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -OverwriteExisting
-{{ Fill OverwriteExisting Description }}
+When true, the new list will overwrite the existing list. Otherwise, the system will append the items to existing list.
 
 ```yaml
 Type: SwitchParameter
@@ -62,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectID
-{{ Fill ProjectID Description }}
+Remarcable project number. If provided, this will be the primary field used to create project.
 
 ```yaml
 Type: String
@@ -77,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -ProjectLists
-{{ Fill ProjectLists Description }}
+List of project lists to add.
 
 ```yaml
 Type: ProjectList[]
@@ -96,11 +93,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+{
+    "detail": "Items imported"
+}
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=321

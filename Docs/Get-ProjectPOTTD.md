@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-ProjectPOTTD
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrieves a list of all active project's grand total to date.
 
 ## SYNTAX
 
@@ -16,22 +16,22 @@ schema: 2.0.0
 Get-ProjectPOTTD [[-MainJobNumber] <String>] [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-ProjectPOTTD 
 ```
 
-{{ Add example description here }}
+### Example 2
+```powershell
+PS C:\> Get-ProjectPOTTD -MainJobNumber "1297847A"
+```
 
 ## PARAMETERS
 
 ### -MainJobNumber
-{{ Fill MainJobNumber Description }}
+Select an individual project's grand total to date.
 
 ```yaml
 Type: String
@@ -54,7 +54,27 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+[
+    {
+        "id": "99fasd9f9-9999-4089-a7b2-c070f4bdfads2",
+        "name": "Project Name",
+        "description": "",
+        "main_job_num": "7567454",
+        "grand_total_to_date": 342.2
+    },
+    {
+        "id": "32131231r-9999-4089-a7b2-c070f4bdfads2",
+        "name": "Project Name2",
+        "description": "",
+        "main_job_num": "123456",
+        "grand_total_to_date": 21312.7
+    },
+    .
+    .
+    .
+]
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=470

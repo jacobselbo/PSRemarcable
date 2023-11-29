@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-StockFile
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Create new stock file items or update existing ones.
 
 ## SYNTAX
 
@@ -16,22 +16,18 @@ schema: 2.0.0
 Import-StockFile [-CompanyBranchID] <String> [-StockFileItems] <StockFileItem[]> [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $StockFileItem = New-StockFileItem -SKU "4342s2" -BranchStockQuantity 90 -StockQuantity 546
+PS C:\> Import-StockFile -CompanyBranchId 1 -StockFileItmes @($StockFileItem)
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -CompanyBranchID
-{{ Fill CompanyBranchID Description }}
+This is a seller company branch Remarcable ID.
 
 ```yaml
 Type: String
@@ -46,7 +42,7 @@ Accept wildcard characters: False
 ```
 
 ### -StockFileItems
-{{ Fill StockFileItems Description }}
+List of stock file items
 
 ```yaml
 Type: StockFileItem[]
@@ -69,7 +65,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+{
+    "detail": "'We are processing your file. You will get an email notification once we are fully complete."
+}
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=213

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Search-Project
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets a list of projects filtered based off paramteers.
 
 ## SYNTAX
 
@@ -17,22 +17,17 @@ Search-Project [[-Search] <String>] [[-Order] <String>] [[-CurrentStatus] <Strin
  [-OnlyJobs] [-OnlyWorkOrders] [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Search-Project -Search "Building" -CurrentStatus "active" -OnlyJobs
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -CurrentStatus
-{{ Fill CurrentStatus Description }}
+Retrieve projects based on being "active", "archived", or "deleted".
 
 ```yaml
 Type: String
@@ -48,7 +43,7 @@ Accept wildcard characters: False
 ```
 
 ### -MainJobNumber
-{{ Fill MainJobNumber Description }}
+Choose a job number to retrieve for projects.
 
 ```yaml
 Type: String
@@ -63,7 +58,7 @@ Accept wildcard characters: False
 ```
 
 ### -OnlyJobs
-{{ Fill OnlyJobs Description }}
+Allows you to choose to only return jobs.
 
 ```yaml
 Type: SwitchParameter
@@ -78,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -OnlyWorkOrders
-{{ Fill OnlyWorkOrders Description }}
+Allows you to return to only work orders.
 
 ```yaml
 Type: SwitchParameter
@@ -93,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -Order
-{{ Fill Order Description }}
+Order to return project list order, either "name" or "created_date". If the reverse of "name" or "created_date" is wanted add prefix of "-".
 
 ```yaml
 Type: String
@@ -109,7 +104,7 @@ Accept wildcard characters: False
 ```
 
 ### -Search
-{{ Fill Search Description }}
+Returns projects that contain the given string in the name or description. Case-insensitive.
 
 ```yaml
 Type: String
@@ -132,7 +127,81 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+[
+    {
+        "id": "03332b75-408e-4d49-8672-e35fc1d46de3",
+        "current_status": "active",
+        "name": "Datacenter, Cleveland OH",
+        "description": "phase 1",
+        "created_date": "2020-02-04T15:54:20.054450Z",
+        "updated_on": "2020-07-09T04:20:24.239668Z",
+        "main_job_num": "1234564",
+        "tax_rate": 6.25, 
+        "tax_code": "150C",
+        "is_job": true,
+        "custom_var_1": "16",
+        "custom_var_2": "169T",
+        "require_phase": false,
+        "require_cost_code": false,
+        "require_wbs_code_1": false,
+        "default_material_phase_prefix": "07",
+        "total_tools_on_job": 3,
+        "use_labor_phase_as_material_phase_prefix": false,
+        "material_phase_code": [
+            {
+                "code": "1100",
+                "name": "conduit"
+            },
+            {
+                "code": "1200",
+                "name": "box"
+            },
+            .
+            .
+            .
+        ],
+        "labor_phase_code": [
+            {
+                "code": "100",
+                "name": "In-wall"
+            },
+            {
+                "code": "200",
+                "name": "Underground"
+            },
+            .
+            .
+            .
+        ],
+        "wbs_code_1_options": [
+            {
+                "code": "1001",
+                "name": "wbs code A"
+            },
+            {
+                "code": "2001",
+                "name": "wbs code B"
+            },
+            .
+            .
+            .
+        ],
+        "address": {
+            "note": "",
+            "Field_1": "1234 1st Ave"
+            "Field_2": ""
+            "city": "Cleveland"
+            "state": "OH"
+            "zip": "12345"
+            "country": "USA"
+        }
+    },
+    .
+    .
+    .
+]
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=66

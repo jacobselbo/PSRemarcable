@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-BulkProject
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Bulk import new or updated projects.
 
 ## SYNTAX
 
@@ -16,22 +16,28 @@ schema: 2.0.0
 Import-BulkProject [-Projects] <Project[]> [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $Project1 = New-Project -ProjectName "Test" -Status "active" -MainJobNumber "123832A"
+PS C:\> $Project2 = New-Project -ProjectName "Test2" -Status "active" -MainJobNumber "547732D"
+PS C:\> Import-BulkProject @($Project1, $Project2)
 ```
 
-{{ Add example description here }}
+### Example 2
+```powershell
+PS C:\> $Project1 = [Project]::new(@{project_name="Test";status="active";main_job_num="123832A"})
+PS C:\> $Project2 = [Project]::new(@{project_name="Test2";status="active";main_job_num="547732D"})
+PS C:\> Import-BulkProject @($Project1, $Project2)
+```
+
+Example 2 is used when importing data already retrieved from Remarcable API service. This is preferable if data is simply being transformed, not made new.
 
 ## PARAMETERS
 
 ### -Projects
-{{ Fill Projects Description }}
+List of projects to import
 
 ```yaml
 Type: Project[]
@@ -54,7 +60,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+{
+    "detail": "We are processing your bulk import project request. If error occurs, you will get an email notification."
+}
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=103

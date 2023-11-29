@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-ERPOrder
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets account system order information based off a PO number.
 
 ## SYNTAX
 
@@ -16,22 +16,17 @@ schema: 2.0.0
 Get-ERPOrder [[-PONumber] <String>] [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-ERPOrder -PONumber 65165152
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -PONumber
-{{ Fill PONumber Description }}
+PO Number to request information about.
 
 ```yaml
 Type: String
@@ -54,7 +49,41 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+{
+    "id": "9564b285-2fb7-469b-ba82-6cbba0cd842e",
+    "company_code": "1",
+    "po_number": "65165152",
+    "job_num": "q23462456",
+    "po_status": "active",
+    "tax_amount": 1.46,
+    "total_amount": 106.40,
+    "order_items": [
+        {
+            "line_number": 1,
+            "item_code": "12EMT",
+            "description": "1/2\" EMT Insulating Bushing",
+            "quantity": 200,
+            "received_quantity": 50,
+            "unit_price": 20.00,
+            "extended_price": 300.00,
+            "phase_code": "0704100",
+            "gl_code": "1605000",
+        },
+        {
+            "line_number": 2,
+            "item_code": "34EMT",
+            "description": "3/4\" EMT Insulating Bushing",
+            "quantity": 100,
+            "received_quantity": 100,
+            "unit_price": 50.00000,
+            "extended_price": 50.00,
+            "phase_code": "0704100",
+            "gl_code": "1605000",
+        }
+    ]
+}
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=73

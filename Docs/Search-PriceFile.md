@@ -8,7 +8,7 @@ schema: 2.0.0
 # Search-PriceFile
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Gets a list of price files.
 
 ## SYNTAX
 
@@ -16,22 +16,17 @@ schema: 2.0.0
 Search-PriceFile [[-Search] <String>] [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Search-PriceFile -Search "Wire"
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Search
-{{ Fill Search Description }}
+Searches price files and company names for keywords.
 
 ```yaml
 Type: String
@@ -54,7 +49,35 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+[
+    {
+        "id": "632c01aa-0600-493d-8fde-137f365952de",
+        "name": "Blanket Pricing",
+        "supplying_company_name": "Van Meter",
+        "supplying_company_id": "532c01aa-0600-493d-8fde-137f365952de",
+        "supplying_company_branch_name": null,
+        "supplying_company_branch_id": null,
+        "is_shared_with_supplier": true,
+        "is_default": true,
+        "is_locked": false,
+        "notification_list_json": [
+            {
+                "name": "Contractor2 Name",
+                "id": 1,
+                "email": "contractor2@yourdomain.com"
+            }
+        ],
+        "expire_date": null,
+        "created_date": "2022-01-24T12:56:13.615440Z",
+        "updated_on": "2022-01-24T12:56:13.615451Z",
+        "price_updated_on": "2021-07-08T04:35:54.410008Z"
+    },
+    .
+    .
+    .
+]
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=69

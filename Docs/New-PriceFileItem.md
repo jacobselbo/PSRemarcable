@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-PriceFileItem
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a Price File Object to be imported or updated.
 
 ## SYNTAX
 
@@ -17,22 +17,17 @@ New-PriceFileItem [-StockNumber] <String> [-Description] <String> [-SKU] <String
  [-Price] <Single> [-UnitOfMeasurement] <String> [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-PriceFileItem -StockNumber "100" -Description "Test" -SKU "s42s3" -UPC "2039A" -Price 100.10 -UnitOfMeasurement "10"
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -Description
-{{ Fill Description Description }}
+Price file item description
 
 ```yaml
 Type: String
@@ -47,7 +42,7 @@ Accept wildcard characters: False
 ```
 
 ### -Price
-{{ Fill Price Description }}
+Price of given UPC
 
 ```yaml
 Type: Single
@@ -62,7 +57,7 @@ Accept wildcard characters: False
 ```
 
 ### -SKU
-{{ Fill SKU Description }}
+Seller company Item ID
 
 ```yaml
 Type: String
@@ -77,7 +72,7 @@ Accept wildcard characters: False
 ```
 
 ### -StockNumber
-{{ Fill StockNumber Description }}
+Manufacturer stock number of price file item
 
 ```yaml
 Type: String
@@ -92,7 +87,7 @@ Accept wildcard characters: False
 ```
 
 ### -UPC
-{{ Fill UPC Description }}
+11-digit UPC number of a price file item
 
 ```yaml
 Type: String
@@ -107,7 +102,7 @@ Accept wildcard characters: False
 ```
 
 ### -UnitOfMeasurement
-{{ Fill UnitOfMeasurement Description }}
+Typical values are 1, 100, 1000, E, M, C. For example, conduit is typically sold per 100ft. If the the average price is $200/100ft. The price will be 200 and UOM will be 100
 
 ```yaml
 Type: String
@@ -130,7 +125,4 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
-
-## RELATED LINKS
+### PriceFileItem

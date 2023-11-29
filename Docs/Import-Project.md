@@ -8,7 +8,7 @@ schema: 2.0.0
 # Import-Project
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a new project or updates an existing project.
 
 ## SYNTAX
 
@@ -16,22 +16,26 @@ schema: 2.0.0
 Import-Project [-Project] <Project> [<CommonParameters>]
 ```
 
-## DESCRIPTION
-{{ Fill in the Description }}
-
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $Project = New-Project -ProjectName "Test" -Status "active" -MainJobNumber "123832A"
+PS C:\> Import-Project $Project
 ```
 
-{{ Add example description here }}
+### Example 2
+```powershell
+PS C:\> $Project = [Project]::new(@{project_name="Test";status="active";main_job_num="123832A"})
+PS C:\> Import-Project $Project
+```
+
+Example 2 is used when importing data already retrieved from Remarcable API service. This is preferable if data is simply being transformed, not made new.
 
 ## PARAMETERS
 
 ### -Project
-{{ Fill Project Description }}
+Project to import.
 
 ```yaml
 Type: Project
@@ -50,11 +54,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+Project from `New-Project`
 
 ## OUTPUTS
 
-### System.Object
-## NOTES
+```json
+{
+    "detail": "success",
+    "remarcable_project_id": "facbef31-50ba-4599-99f8-765cf631191a"
+}
+```
 
 ## RELATED LINKS
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=68
