@@ -43,6 +43,10 @@ Function Get-InvoiceItem {
             Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
         }
 
+        if ($StartDate) {
+            ($EndDate - $StartDate).TotalDays | Assert-LessThanEqualTo -Other 180 -Message "StartDate and EndDate range cannot exceed 180 days"
+        }
+
         $script:RemarcableClient.DoesAPITokenNeedRefresh()
 
         $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListInvoiceItem/"
