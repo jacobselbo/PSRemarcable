@@ -14,7 +14,7 @@
 Function Import-Project {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline)]
         [Project]
         $Project
     )

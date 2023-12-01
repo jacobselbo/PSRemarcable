@@ -14,7 +14,7 @@
 Function Import-BulkProject {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline)]
         [Project[]]
         $Projects
     )

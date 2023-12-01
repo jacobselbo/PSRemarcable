@@ -93,6 +93,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+List of `ProjectList` classes
+
 ## OUTPUTS
 
 ```json

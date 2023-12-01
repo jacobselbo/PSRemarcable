@@ -22,7 +22,7 @@ Import-PriceFile [-PriceFileID] <String> [-BuyerCompanyID] <String> [-PriceFileI
 ### Example 1
 ```powershell
 PS C:\> $PriceFileItem = New-PriceFileItem -StockNumber "S128382" -Description "Test" -SKU "128382" -UPC "123828" -Price 123.1 -UnitOfMeasurement "100"
-PS C:\> Import-PriceFile -PriceFileID "af231820-1014-49bf-a842-824c2200cddf" -BuyerCompanyID "10168"
+PS C:\> Import-PriceFile -PriceFileID "af231820-1014-49bf-a842-824c2200cddf" -BuyerCompanyID "10168" -PriceFileItems @($PriceFileItem)
 ```
 
 ## PARAMETERS
@@ -77,7 +77,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
+List of `PriceFile` classes
 
 ## OUTPUTS
 

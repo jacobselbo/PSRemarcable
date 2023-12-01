@@ -54,7 +54,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-Project from `New-Project`
+`Project` class
 
 ## OUTPUTS
 

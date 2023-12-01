@@ -17,6 +17,7 @@ Function Import-ProjectList {
         [string]
         $JobNumber,
 
+        [Parameter(ValueFromPipeline)]
         [ProjectList[]]
         $ProjectLists,
 

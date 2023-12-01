@@ -28,7 +28,7 @@ Function Import-PriceFile {
         [string]
         $BuyerCompanyID,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline)]
         [PriceFileItem[]]
         $PriceFileItems
     )
