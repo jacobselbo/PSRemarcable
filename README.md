@@ -31,36 +31,36 @@ The Remarcable API documentation can be found [here](https://www.remarcable.com/
 Powershell documentation can be found in `/Docs/`
 
 ## Current Functions
-| **Name** | **Purpose** |
-| - | - |
-| Initialize-RemarcableClient |  Creates token to be used for all other functions  |
-| Get-AssetItem | Gets a list of remarcable asset items |
-| Get-AssetRate | Gets a list of asset rates |
-| Get-AssetRequest | Gets an asset request |
-| Search-AssetRequest | Gets a list asset requests |
-| Get-PriceFile | Gets a list of price files from ID |
-| Get-PriceFileItemPrice | Gets price file item prices from ID |
-| Search-PriceFile | Gets a list of price files from search terms |
-| Import-PriceFile | Creates or updates price file items |
-| Import-StockFile | Creates or updates stock file items |
-| Get-Project | Gets a project from project ID |
-| Get-ProjectPOTTD | Gets a list of projects' grand total to date |
-| Search-Project | Gets a list of projects from fields |
-| Import-Project | Creates or updates a project in Remarcable |
-| Import-BulkProject | Creates or updates a list of projects in Remarcable |
-| Import-ProjectList | Creates or updates a project list in Remarcable |
-| Get-ERPOrder | Gets account system order information |
-| Get-InvoiceItem | Gets a list of invoice items |
-| Get-SalesOrderItem | Gets a list of SO items |
-| Get-UserAccount | Gets a list of user accounts in Remarcable |
-| Import-PONumber | Sends a PO number and phase code to a project |
-| Get-Order | Gets a list of PO items from IDs |
-| Search-Order | Gets a list of POs based of fields |
-| Search-OrderItem | Gets a list of PO items based of fields |
-| New-Address | Creates an address object |
-| New-PhaseCode | Creates a phase code object |
-| New-PriceFileItem | Creates a price file object |
-| New-StockFileItem | Creats a stock file object |
-| New-Project | Creates a project object |
-| New-ProjectList | Creates a project list object |
-| New-ProjectListItem | Creates a list item for a project list |
+| **Name** | **Purpose** | **Documentation** |
+| - | - | - |
+| Initialize-RemarcableClient |  Creates token to be used for all other functions  | [Link](Docs\Get-AssetItem.md) |
+| Get-AssetItem | Gets a list of remarcable asset items | [Link](Docs\Get-AssetItem.md) |
+| Get-AssetRate | Gets a list of asset rates | [Link](Docs\Get-AssetRate.md) |
+| Get-AssetRequest | Gets an asset request | [Link](Docs\Get-AssetRequest.md) |
+| Search-AssetRequest | Gets a list asset requests | [Link](Docs\Search-AssetRequest.md) |
+| Get-PriceFile | Gets a list of price files from ID | [Link](Docs\Get-PriceFile.md) |
+| Get-PriceFileItemPrice | Gets price file item prices from ID | [Link](Docs\Get-PriceFileItemPrice.md) |
+| Search-PriceFile | Gets a list of price files from search terms | [Link](Docs\Get-PriceFile.md) |
+| Import-PriceFile | Creates or updates price file items | [Link](Docs\Import-PriceFile.md) |
+| Import-StockFile | Creates or updates stock file items | [Link](Docs\Import-StockFile.md) |
+| Get-Project | Gets a project from project ID | [Link](Docs\Get-Project.md) |
+| Get-ProjectPOTTD | Gets a list of projects' grand total to date | [Link](Docs\Get-ProjectPOTTD.md) |
+| Search-Project | Gets a list of projects from fields | [Link](Docs\Search-Project.md) |
+| Import-Project | Creates or updates a project in Remarcable | [Link](Docs\Import-Project.md) |
+| Import-BulkProject | Creates or updates a list of projects in Remarcable | [Link](Docs\Import-BulkProject.md) |
+| Import-ProjectList | Creates or updates a project list in Remarcable | [Link](Docs\Import-ProjectList.md) |
+| Get-ERPOrder | Gets account system order information | [Link](Docs\Get-ERPOrder.md) |
+| Get-InvoiceItem | Gets a list of invoice items | [Link](Docs\Get-InvoiceItem.md) |
+| Get-SalesOrderItem | Gets a list of SO items | [Link](Docs\Get-SalesOrderItem.md) |
+| Get-UserAccount | Gets a list of user accounts in Remarcable | [Link](Docs\Get-UserAccount.md) |
+| Import-PONumber | Sends a PO number and phase code to a project | [Link](Docs\Import-PONumber.md) |
+| Get-Order | Gets a list of PO items from IDs | [Link](Docs\Get-Order.md) |
+| Search-Order | Gets a list of POs based of fields | [Link](Docs\Search-Order.md) |
+| Search-OrderItem | Gets a list of PO items based of fields | [Link](Docs\Search-OrderItem.md) |
+| New-Address | Creates an address object | [Link](Docs\New-Address.md) |
+| New-PhaseCode | Creates a phase code object | [Link](Docs\New-PhaseCode.md) |
+| New-PriceFileItem | Creates a price file object | [Link](Docs\New-PriceFileItem.md) |
+| New-StockFileItem | Creats a stock file object | [Link](Docs\New-StockFileItem.md) |
+| New-Project | Creates a project object | [Link](Docs\New-Project.md) |
+| New-ProjectList | Creates a project list object | [Link](Docs\New-ProjectList.md) |
+| New-ProjectListItem | Creates a list item for a project list | [Link](Docs\New-ProjectListItem.md) |
