@@ -35,16 +35,7 @@ Function Get-AssetItem {
         $WarehouseID
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListAssetItem/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/ListAssetItem/" -Method GET -Parameters @{
             model_type = $ModelType
             category = $Category
             warehouse_id = $WarehouseID
@@ -52,7 +43,7 @@ Function Get-AssetItem {
     }
     Process {
         try {
-            $PagedResults = Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET
+            $PagedResults = Invoke-RestMethod @RequestParameters
             $PagedResults.results.asset_list = Get-PaginationResult $PagedResults "asset_list"
 
             return $PagedResults.results

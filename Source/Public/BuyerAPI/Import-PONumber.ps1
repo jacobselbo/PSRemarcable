@@ -53,15 +53,7 @@ Function Import-PONumber {
         $OrderName
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/SendPONum/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/SendPONum/" -Method POST -Parameters @{
             project_id = $ProjectID
             user_email = $UserEmail
             po_number = $PONumber
@@ -72,7 +64,7 @@ Function Import-PONumber {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method POST
+            return Invoke-RestMethod @RequestParameters
         } catch {
             Write-Error "Failed to send Remarcable PO Number"
             Write-Error $_

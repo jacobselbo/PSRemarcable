@@ -25,27 +25,18 @@ Function Get-Project {
         $AsClass
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/RetrieveProject/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/RetrieveProject/" -Method GET -Parameters @{
             project_id = $ProjectID
         }
     }
     Process {
         try {
-            if ($AsClass) {
-                $Data = Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET
+            $Data = Invoke-RestMethod @RequestParameters
 
+            if ($AsClass) {
                 Return [Project]::new($Data)
             } else {
-                Return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET
+                Return $Data
             }
         } catch {
             Write-Error "Failed to retrieve Remarcable Project"

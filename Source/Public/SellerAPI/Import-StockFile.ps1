@@ -26,23 +26,14 @@ Function Import-StockFile {
         $StockFileItems
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/seller_api/v1/ImportStockFile/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/seller_api/v1/ImportStockFile/" -Method POST -Parameters @{
             company_branch_id = $CompanyBranchID
             json_data = @($StockFileItems | ForEach-Object ${ $_.Serialize() })
         }
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method POST
+            return Invoke-RestMethod @RequestParameters
         } catch {
             Write-Error "Failed to import stock file items"
             Write-Error $_

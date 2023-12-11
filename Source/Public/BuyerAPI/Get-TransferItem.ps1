@@ -87,16 +87,7 @@ Function Get-TransferItem {
         $SearchTerms
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListTransferItem/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/ListTransferItem/" -Method GET -Parameters @{
             start_date = $StartDate ? $StartDate.ToString("o") : $null # Create ISO 8601 Date Format
             end_date = $EndDate ? $EndDate.ToString("o") : $null # Create ISO 8601 Date Format
             project_id_list = $ProjectIdList
@@ -109,7 +100,7 @@ Function Get-TransferItem {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET | Get-PaginationResult
+            return Invoke-RestMethod @RequestParameters | Get-PaginationResult
         } catch {
             Write-Error "Failed to retrieve Remarcable transfer items"
             Write-Error $_

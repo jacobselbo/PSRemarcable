@@ -32,16 +32,7 @@ Function Get-PriceFileItemPrice {
         $UPCList
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/GetBuyerPriceFileItemPrice/"
-        $Body = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/GetBuyerPriceFileItemPrice/" -Method POST -Parameters @{
             pricefile_id = $PriceFileID
             allow_substitute = $AllowSubstitute
             upc_list = $UPCList
@@ -49,7 +40,7 @@ Function Get-PriceFileItemPrice {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Body -Method Post
+            return Invoke-RestMethod @RequestParameters
         } catch {
             Write-Error "Failed to retrieve Remarcable Price File Item Prices"
             Write-Error $_

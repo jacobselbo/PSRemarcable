@@ -25,16 +25,7 @@ Function Import-ProjectList {
         $OverwriteExisting
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/CreateProjectList/"
-        $Parameters = @{
-            account_email = $script:RemarcableClient.APICredential.UserName
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/CreateProjectList/" -Method POST -Parameters @{
             project_id = $ProjectID
             job_num = $JobNumber
             overwrite_existing = $OverwriteExisting
@@ -43,7 +34,7 @@ Function Import-ProjectList {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method POST
+            return Invoke-RestMethod @RequestParameters
         } catch {
             Write-Error "Failed to create project lists in Remarcable"
             Write-Error $_

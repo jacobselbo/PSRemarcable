@@ -25,23 +25,14 @@ Function Get-Order {
         $PONumbers
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/RetrievePO/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/RetrievePO/" -Method GET -Parameters @{
             po_numbers = $PONumbers
             po_ids = $POIDs
         }
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET
+            return Invoke-RestMethod @RequestParameters
         } catch {
             Write-Error "Failed to retrieve Remarcable purchase orders"
             Write-Error $_

@@ -59,16 +59,7 @@ Function Search-AssetRequest {
         $RequestStatus
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListToolRequest/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/ListToolRequest/" -Method GET -Parameters @{
             last = $Last
             project_id = $ProjectID
             job_num = $JobNumber
@@ -81,7 +72,7 @@ Function Search-AssetRequest {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET | Get-PaginationResult
+            return Invoke-RestMethod @RequestParameters | Get-PaginationResult
         } catch {
             Write-Error "Failed to find Remarcable asset requests"
             Write-Error $_

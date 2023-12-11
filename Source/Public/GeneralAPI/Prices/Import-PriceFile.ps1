@@ -33,16 +33,7 @@ Function Import-PriceFile {
         $PriceFileItems
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/general_api/v1/ImportPriceFile/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/general_api/v1/ImportPriceFile/" -Method POST -Parameters @{
             price_file_id = $PriceFileID
             buyer_company_id = $BuyerCompanyID
             json_data = @($PriceFileItems | ForEach-Object ${ $_.Serialize() })
@@ -50,7 +41,7 @@ Function Import-PriceFile {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method POST
+            return Invoke-RestMethod @RequestParameters
         } catch {
             Write-Error "Failed to import price file items"
             Write-Error $_

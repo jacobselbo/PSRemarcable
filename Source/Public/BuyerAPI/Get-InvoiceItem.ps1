@@ -39,20 +39,11 @@ Function Get-InvoiceItem {
         $EndDate
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
         if ($StartDate) {
             ($EndDate - $StartDate).TotalDays | Assert-LessThanEqualTo -Other 180 -Message "StartDate and EndDate range cannot exceed 180 days"
         }
 
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListInvoiceItem/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/ListInvoiceItem/" -Method GET -Parameters @{
             so_numbers = $SONumbers
             last = $LastDays
             start_date = $StartDate ? $StartDate.ToString("o") : $null # Create ISO 8601 Date Format
@@ -61,7 +52,7 @@ Function Get-InvoiceItem {
     }
     Process {
         try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET | Get-PaginationResult
+            return Invoke-RestMethod @RequestParameters | Get-PaginationResult
         } catch {
             Write-Error "Failed to retrieve Remarcable Invoice Items"
             Write-Error $_

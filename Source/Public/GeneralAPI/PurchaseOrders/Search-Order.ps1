@@ -43,20 +43,11 @@ Function Search-Order {
         $EndDate
     )
     Begin {
-        if ($null -eq $script:RemarcableClient) {
-            Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
-        }
-
         if ($StartDate) {
             ($EndDate - $StartDate).TotalDays | Assert-LessThanEqualTo -Other 180 -Message "StartDate and EndDate range cannot exceed 180 days"
         }
 
-        $script:RemarcableClient.DoesAPITokenNeedRefresh()
-
-        $URI = "$($script:RemarcableClient.URI)/buyer_api/v1/ListPO/"
-        $Parameters = @{
-            token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
-            account_email = $script:RemarcableClient.APICredential.UserName
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/ListPO/" -Method GET -Parameters @{
             project_id = $ProjectID
             job_num = $JobNumber
             last = $LastDays
@@ -66,7 +57,7 @@ Function Search-Order {
     }
     Process {
        try {
-            return Invoke-RestMethod -Uri $URI -Body $Parameters -Method GET | Get-PaginationResult
+            return Invoke-RestMethod @RequestParameters | Get-PaginationResult
         } catch {
             Write-Error "Failed to retrieve Remarcable purchase orders"
             Write-Error $_
