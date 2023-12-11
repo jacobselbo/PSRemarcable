@@ -33,7 +33,7 @@ Powershell documentation can be found in `/Docs/`
 ## Current Functions
 | **Name** | **Purpose** | **Documentation** |
 | - | - | - |
-| Initialize-RemarcableClient |  Creates token to be used for all other functions  | [Link](Docs\Get-AssetItem.md) |
+| Initialize-RemarcableClient |  Creates token to be used for all other functions  | [Link](Docs\Initialize-RemarcableClient.md) |
 | Get-AssetItem | Gets a list of remarcable asset items | [Link](Docs\Get-AssetItem.md) |
 | Get-AssetRate | Gets a list of asset rates | [Link](Docs\Get-AssetRate.md) |
 | Get-AssetRequest | Gets an asset request | [Link](Docs\Get-AssetRequest.md) |
@@ -53,6 +53,7 @@ Powershell documentation can be found in `/Docs/`
 | Get-InvoiceItem | Gets a list of invoice items | [Link](Docs\Get-InvoiceItem.md) |
 | Get-SalesOrderItem | Gets a list of SO items | [Link](Docs\Get-SalesOrderItem.md) |
 | Get-UserAccount | Gets a list of user accounts in Remarcable | [Link](Docs\Get-UserAccount.md) |
+| Import-UserAccount | Imports or updates a user account in Remarcable | [Link](Docs\Import-UserAccount.md) |
 | Import-PONumber | Sends a PO number and phase code to a project | [Link](Docs\Import-PONumber.md) |
 | Get-Order | Gets a list of PO items from IDs | [Link](Docs\Get-Order.md) |
 | Search-Order | Gets a list of POs based of fields | [Link](Docs\Search-Order.md) |

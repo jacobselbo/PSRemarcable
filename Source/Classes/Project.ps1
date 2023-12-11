@@ -88,7 +88,7 @@ class Project {
 
             if ($SerializedName -eq "material_phase_code" -or $SerializedName -eq "labor_phase_code") {
                 $this.$ClassName = @($InputValue | ForEach-Object { [PhaseCode]::new($_) })
-            } else if ($SerializedName -eq "wbs_code_1_options") {
+            } elseif ($SerializedName -eq "wbs_code_1_options") {
                 $this.$ClassName = @($InputValue | ForEach-Object { [WBSCode]::new($_) })
             } elseif ($SerializedName -eq "address") {
                 $this.$ClassName = [Address]::new($InputValue)
