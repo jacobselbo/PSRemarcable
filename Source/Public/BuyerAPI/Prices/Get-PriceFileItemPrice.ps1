@@ -32,7 +32,7 @@ Function Get-PriceFileItemPrice {
         $UPCList
     )
     Begin {
-        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/GetBuyerPriceFileItemPrice/" -Method POST -Parameters @{
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/GetBuyerPriceFileItemPrice/" -Method POST -JSON -Parameters @{
             pricefile_id = $PriceFileID
             allow_substitute = $AllowSubstitute
             upc_list = $UPCList

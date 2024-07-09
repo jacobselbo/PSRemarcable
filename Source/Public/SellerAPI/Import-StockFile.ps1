@@ -26,7 +26,7 @@ Function Import-StockFile {
         $StockFileItems
     )
     Begin {
-        $RequestParameters = New-RemarcableRequest -URI "/seller_api/v1/ImportStockFile/" -Method POST -Parameters @{
+        $RequestParameters = New-RemarcableRequest -URI "/seller_api/v1/ImportStockFile/" -Method POST -JSON -Parameters @{
             company_branch_id = $CompanyBranchID
             json_data = @($StockFileItems | ForEach-Object ${ $_.Serialize() })
         }

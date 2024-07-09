@@ -27,7 +27,7 @@ Function Get-UserAccount {
         try {
             $Data = Invoke-RestMethod @RequestParameters
 
-            if ($AsClass) {
+            if ($AsClass.IsPresent) {
                 $NewData = @()
 
                 foreach ($RawAccount in $Data) {

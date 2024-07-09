@@ -50,9 +50,9 @@ Function Search-Project {
     Begin {
         $IsJob = $null
 
-        if ($OnlyJobs -and !$OnlyWorkOrders) {
+        if ($OnlyJobs.IsPresent -and !$OnlyWorkOrders.IsPresent) {
             $IsJob = $true
-        } elseif ($OnlyWorkOrders -and !$OnlyJobs) {
+        } elseif ($OnlyWorkOrders.IsPresent -and !$OnlyJobs.IsPresent) {
             $IsJob = $false
         }
 

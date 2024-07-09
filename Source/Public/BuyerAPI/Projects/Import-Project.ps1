@@ -19,7 +19,7 @@ Function Import-Project {
         $Project
     )
     Begin {
-        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/CreateUpdateProject/" -Method POST -Parameters $Project.Serialize()
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/CreateUpdateProject/" -Method POST -Parameters $Project.Serialize() -JSON
     }
     Process {
         try {

@@ -33,11 +33,11 @@ Function Import-PriceFile {
         $PriceFileItems
     )
     Begin {
-        $RequestParameters = New-RemarcableRequest -URI "/general_api/v1/ImportPriceFile/" -Method POST -Parameters @{
+        $RequestParameters = New-RemarcableRequest -URI "/general_api/v1/ImportPriceFile/" -Method POST -JSON -Parameters @{
             price_file_id = $PriceFileID
             buyer_company_id = $BuyerCompanyID
             json_data = @($PriceFileItems | ForEach-Object ${ $_.Serialize() })
-        }
+        } 
     }
     Process {
         try {

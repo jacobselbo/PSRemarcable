@@ -53,7 +53,7 @@ Function Import-PONumber {
         $OrderName
     )
     Begin {
-        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/SendPONum/" -Method POST -Parameters @{
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/SendPONum/" -Method POST -JSON -Parameters @{
             project_id = $ProjectID
             user_email = $UserEmail
             po_number = $PONumber

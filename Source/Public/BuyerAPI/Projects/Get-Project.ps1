@@ -33,7 +33,7 @@ Function Get-Project {
         try {
             $Data = Invoke-RestMethod @RequestParameters
 
-            if ($AsClass) {
+            if ($AsClass.IsPresent) {
                 Return [Project]::new($Data)
             } else {
                 Return $Data

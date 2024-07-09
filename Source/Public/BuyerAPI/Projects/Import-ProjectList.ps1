@@ -25,10 +25,10 @@ Function Import-ProjectList {
         $OverwriteExisting
     )
     Begin {
-        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/CreateProjectList/" -Method POST -Parameters @{
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/CreateProjectList/" -Method POST -JSON -Parameters @{
             project_id = $ProjectID
             job_num = $JobNumber
-            overwrite_existing = $OverwriteExisting
+            overwrite_existing = $OverwriteExisting.IsPresent
             project_lists = @($ProjectLists | ForEach-Object { $_.Serialize() })
         }
     }

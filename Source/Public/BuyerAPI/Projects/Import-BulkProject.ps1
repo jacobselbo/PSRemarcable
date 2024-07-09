@@ -19,7 +19,7 @@ Function Import-BulkProject {
         $Projects
     )
     Begin {
-        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/BulkImportProject/" -Method POST -Parameters @{
+        $RequestParameters = New-RemarcableRequest -URI "/buyer_api/v1/BulkImportProject/" -Method POST -JSON -Parameters @{
             company_branch_id = $CompanyBranchID
             json_data = @($Projects | ForEach-Object { $_.Serialize() })
         }
