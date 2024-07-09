@@ -28,42 +28,58 @@
 
     .PARAMETER JobTitle
         User job title
+
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
-Function New-StockFileItem {
+Function New-UserAccount {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [ValidateRange(1, 40)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
+        [ValidateLength(1, 40)]
         [string]
         $FirstName,
-        [Parameter(Mandatory = $true)]
-        [ValidateRange(1, 40)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
+        [ValidateLength(1, 40)]
         [string]
         $LastName,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [mailaddress]
         $Email,
-        [ValidateRange(1, 20)]
+        [Parameter(ParameterSetName = "NotRaw")]
+        [ValidateLength(1, 20)]
         [string]
         $PhoneNumber,
+        [Parameter(ParameterSetName = "NotRaw")]
         [ValidateLength(1, 200)]
         [string]
         $EmployeeID,
+        [Parameter(ParameterSetName = "NotRaw")]
         [string]
         $CompanyBranchName,
+        [Parameter(ParameterSetName = "NotRaw")]
         [string]
         $UserGroupName,
+        [Parameter(ParameterSetName = "NotRaw")]
         [ValidateLength(1, 200)]
         [string]
-        $JobTitle
+        $JobTitle,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")]
+        [hashtable]
+        $Raw
     )
     Process {
-        $UserAccount = [UserAccount]::new($FirstName, $LastName, $Email)
+        if ($Raw) {
+            return [UserAccount]::new($Raw)
+        } else {
+            $UserAccount = [UserAccount]::new($FirstName, $LastName, $Email)
 
-        $PSBoundParameters.Keys.ForEach{
-            $UserAccount.$_ = $PSBoundParameters[$_]
+            $PSBoundParameters.Keys.ForEach{
+                $UserAccount.$_ = $PSBoundParameters[$_]
+            }
+
+            return $UserAccount
         }
-
-        return $UserAccount
     }
 }

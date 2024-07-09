@@ -10,19 +10,30 @@
 
     .PARAMETER Name
         Name of Phase Code
+
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
 Function New-PhaseCode {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $Code,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
-        $Name
+        $Name,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")]
+        [hashtable]
+        $Raw
     )
     Process {
-        return [PhaseCode]::new($Code, $Name)
+        if ($Raw) {
+            return [PhaseCode]::new($Raw)
+        } else {
+            return [PhaseCode]::new($Code, $Name)
+        }
     }
 }

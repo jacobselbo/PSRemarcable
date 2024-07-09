@@ -100,61 +100,70 @@
 
     .PARAMETER WBSCode1Options
         WBS Codes.
+
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
 Function New-Project {
     [CmdletBinding()]
     param (
         # Create/Update Project API Parameters
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [ValidateSet("active", "archived")]
         [string] $Status,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [ValidateLength(1, 200)]
         [string] $ProjectName,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string] $MainJobNumber,
 
-        [string] $ContractorSystemProjectID,
-        [mailaddress] $ProjectManagerEmail,
-        [float] $TaxRate,
-        [string] $TaxCode,
-        [bool] $IsJob,
-        [bool] $RequirePhase,
-        [bool] $RequireCostCode,
-        [bool] $RequireToolPhase,
-        [bool] $RequireToolCostCode,
-        [bool] $UseLaborPhaseAsMaterialPhasePrefix,
-        [string] $DefaultMaterialPhasePrefix,
-        [string] $CustomVariable1,
-        [string] $CustomVariable2,
-        [string] $Description,
-        [PhaseCode[]] $MaterialPhaseCode,
-        [PhaseCode[]] $LaborPhaseCode,
-        [Address] $Address,
-        [string] $ClientCompanyCode,
-        [mailaddress[]] $ProjectOwnerEmailList,
-        [int] $CompanyBranchID,
-        [bool] $IsGroup,
-        [string] $ParentMainJobNumber,
-        [bool] $LumpSumExport,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ContractorSystemProjectID,
+        [Parameter(ParameterSetName = "NotRaw")] [mailaddress] $ProjectManagerEmail,
+        [Parameter(ParameterSetName = "NotRaw")] [float] $TaxRate,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $TaxCode,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $IsJob,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $RequirePhase,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $RequireCostCode,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $RequireToolPhase,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $RequireToolCostCode,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $UseLaborPhaseAsMaterialPhasePrefix,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $DefaultMaterialPhasePrefix,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $CustomVariable1,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $CustomVariable2,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $Description,
+        [Parameter(ParameterSetName = "NotRaw")] [PhaseCode[]] $MaterialPhaseCode,
+        [Parameter(ParameterSetName = "NotRaw")] [PhaseCode[]] $LaborPhaseCode,
+        [Parameter(ParameterSetName = "NotRaw")] [Address] $Address,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ClientCompanyCode,
+        [Parameter(ParameterSetName = "NotRaw")] [mailaddress[]] $ProjectOwnerEmailList,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $CompanyBranchID,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $IsGroup,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ParentMainJobNumber,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $LumpSumExport,
 
         # Bulk Import Parameters
-        [bool] $RequireWBSCode1,
-        [string] $ToolCostPONumber,
-        [int] $CurrentJobPONumber,
-        [bool] $TaxExempt,
-        [bool] $AllowDirectPurchase,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $RequireWBSCode1,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ToolCostPONumber,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $CurrentJobPONumber,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $TaxExempt,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $AllowDirectPurchase,
 
         # Get-Project Paramters
-        [WBSCode[]] $WBSCode1Options
+        [Parameter(ParameterSetName = "NotRaw")] [WBSCode[]] $WBSCode1Options,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")] [hashtable] $Raw
     )
     Process {
-        $Project = [Project]::new($Status, $ProjectName, $MainJobNumber)
+        if ($Raw) {
+            return [Project]::new($Raw)
+        } else {
+            $Project = [Project]::new($Status, $ProjectName, $MainJobNumber)
 
-        $PSBoundParameters.Keys.ForEach{
-            $Project.$_ = $PSBoundParameters[$_]
+            $PSBoundParameters.Keys.ForEach{
+                $Project.$_ = $PSBoundParameters[$_]
+            }
+
+            return $Project
         }
-
-        return $Project
     }
 }

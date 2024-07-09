@@ -70,41 +70,49 @@
 
     .PARAMETER IsSubstituteAllowed
         Item attribute to allow substitution
+
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
 Function New-ProjectListItem {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [string] $Description,
-        [string] $Comments,
-        [string] $RemarcableSKU,
-        [int] $UPCGeneric,
-        [string] $ManufacturerName,
-        [string] $ManufacturerStockNumber,
-        [int] $Quantity,
-        [int] $TotalQuantity,
-        [int] $ReleasedQuantity,
-        [float] $UnitPrice,
-        [string] $Unit,
-        [int] $UnitOfMeasurement,
-        [string] $PhaseCode,
-        [string] $CostCode,
-        [string] $WBSCode1,
-        [int] $SpoolNumber,
-        [string] $SpoolTag,
-        [int] $LayerNumber,
-        [string] $LayerTag,
-        [int] $WireNumber,
-        [string] $WireTag,
-        [switch] $IsSubstituteAllowed
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")] [string] $Description,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $Comments,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $RemarcableSKU,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $UPCGeneric,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ManufacturerName,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ManufacturerStockNumber,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $Quantity,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $TotalQuantity,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $ReleasedQuantity,
+        [Parameter(ParameterSetName = "NotRaw")] [float] $UnitPrice,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $Unit,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $UnitOfMeasurement,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $PhaseCode,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $CostCode,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $WBSCode1,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $SpoolNumber,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $SpoolTag,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $LayerNumber,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $LayerTag,
+        [Parameter(ParameterSetName = "NotRaw")] [int] $WireNumber,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $WireTag,
+        [Parameter(ParameterSetName = "NotRaw")] [bool] $IsSubstituteAllowed,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")] [hashtable] $Raw
     )
     Process {
-        $Item = [ProjectListItem]::new($Description)
+        if ($Raw) {
+            return [ProjectListItem]::new($Raw)
+        } else {
+            $Item = [ProjectListItem]::new($Description)
 
-        $PSBoundParameters.Keys.ForEach{
-            $Item.$_ = $PSBoundParameters[$_]
+            $PSBoundParameters.Keys.ForEach{
+                $Item.$_ = $PSBoundParameters[$_]
+            }
+
+            return $Item
         }
-
-        return $Item
     }
 }

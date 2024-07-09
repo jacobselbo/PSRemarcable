@@ -22,35 +22,46 @@
 
     .PARAMETER UnitOfMeasurement
         Typical values are 1, 100, 1000, E, M, C. For example, conduit is typically sold per 100ft. If the the average price is $200/100ft. The price will be 200 and UOM will be 100
+
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
 Function New-PriceFileItem {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $StockNumber,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $Description,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $SKU,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $UPC,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [float]
         $Price,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
-        $UnitOfMeasurement
+        $UnitOfMeasurement,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")]
+        [hashtable]
+        $Raw
     )
     Process {
-        return [PriceFileItem]::new($StockNumber, $Description, $SKU, $UPC, $Price, $UnitOfMeasurement)
+        if ($Raw) {
+            return [PriceFileItem]::new($Raw)
+        } else {
+            return [PriceFileItem]::new($StockNumber, $Description, $SKU, $UPC, $Price, $UnitOfMeasurement)
+        }
     }
 }

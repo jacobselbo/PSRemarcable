@@ -16,26 +16,35 @@
 
     .PARAMETER ProjectListItems
         You can pass a list of project list you want to create, append, or overwrite.
+
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
 Function New-ProjectList {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
-        [string] $ListName,
-        [string] $ParentListName,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ListName,
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ParentListName,
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [ValidateSet("default", "scheduling")]
-        [string] $ListType = "default",
-        [Parameter(Mandatory = $true)]
-        [ProjectListItem[]] $ProjectListItems
+        [Parameter(ParameterSetName = "NotRaw")] [string] $ListType = "default",
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
+        [Parameter(ParameterSetName = "NotRaw")] [ProjectListItem[]] $ProjectListItems,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")] [hashtable] $Raw
     )
     Process {
-        $ProjectList = [ProjectList]::new($ListName, $ListType, $ProjectListItems)
+        if ($Raw) {
+            return [ProjectList]::new($Raw)
+        } else {
+            $ProjectList = [ProjectList]::new($ListName, $ListType, $ProjectListItems)
 
-        $PSBoundParameters.Keys.ForEach{
-            $ProjectList.$_ = $PSBoundParameters[$_]
+            $PSBoundParameters.Keys.ForEach{
+                $ProjectList.$_ = $PSBoundParameters[$_]
+            }
+
+            return $ProjectList
         }
-
-        return $ProjectList
     }
 }

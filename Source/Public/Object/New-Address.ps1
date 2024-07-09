@@ -25,40 +25,53 @@
 
     .PARAMETER ShippingNote
         Delivery Location. Such as: Electric Trailer
+
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
 Function New-Address {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $Field1,
+        [Parameter(ParameterSetName = "NotRaw")]
         [string]
         $Field2,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $City,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $State,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [ValidateSet("USA", "Canada")]
         [string]
         $Country,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $ZIP,
 
+        [Parameter(ParameterSetName = "NotRaw")]
         [string]
-        $ShippingNote
+        $ShippingNote,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")]
+        [hashtable]
+        $Raw
     )
     Process {
-        $Address = [Address]::new($Field1, $City, $State, $ZIP, $Country)
+        if ($Raw) {
+            return [Address]::new($Raw)
+        } else {
+            $Address = [Address]::new($Field1, $City, $State, $ZIP, $Country)
 
-        $Address.Field2 = $Field2
-        $Address.ShippingNote = $ShippingNote
+            $Address.Field2 = $Field2
+            $Address.ShippingNote = $ShippingNote
 
-        return $Address
+            return $Address
+        }
     }
 }

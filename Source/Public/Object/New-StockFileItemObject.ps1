@@ -13,23 +13,34 @@
 
     .PARAMETER BranchStockQuantity
         Local branch in-store stock quantity
+    
+    .PARAMETER Raw
+        Allows raw hashtable input. Used for data manipulation
 #>
 Function New-StockFileItem {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [string]
         $SKU,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [int]
         $StockQuantity,
 
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, ParameterSetName = "NotRaw")]
         [int]
-        $BranchStockQuantity
+        $BranchStockQuantity,
+
+        [Parameter(Mandatory = $true, ParameterSetName = "Raw")]
+        [hashtable]
+        $Raw
     )
     Process {
-        return [StockFileItem]::new($SKU, $StockQuantity, $BranchStockQuantity)
+        if ($Raw) {
+            return [StockFileItem]::new($Raw)
+        } else {
+            return [StockFileItem]::new($SKU, $StockQuantity, $BranchStockQuantity)
+        }
     }
 }
