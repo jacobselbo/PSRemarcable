@@ -1,3 +1,0 @@
-@{
-    Path                        = "PSRemarcable.psd1"
-}
