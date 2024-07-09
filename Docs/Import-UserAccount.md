@@ -5,42 +5,40 @@ online version:
 schema: 2.0.0
 ---
 
-# Import-BulkProject
+# Import-UserAccount
 
 ## SYNOPSIS
-Bulk import new or updated projects.
+Creates a new user or updates an existing user.
 
 ## SYNTAX
 
 ```
-Import-BulkProject [-Projects] <Project[]> [<CommonParameters>]
+Import-UserAccount [-UserAccount] <UserAccount> [<CommonParameters>]
 ```
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> $Project1 = New-Project -ProjectName "Test" -Status "active" -MainJobNumber "123832A"
-PS C:\> $Project2 = New-Project -ProjectName "Test2" -Status "active" -MainJobNumber "547732D"
-PS C:\> Import-BulkProject @($Project1, $Project2)
+PS C:\> $UserAccount = New-UserAccount -FirstName "Test" -LastName "Test" -Email "test@gmail.com"
+PS C:\> Import-UserAccount $UserAccount
 ```
 
 ### Example 2
 ```powershell
-PS C:\> $Project1 = New-Project -Raw @{project_name="Test";status="active";main_job_num="123832A"}
-PS C:\> $Project2 = New-Project -Raw @{project_name="Test2";status="active";main_job_num="547732D"}
-PS C:\> Import-BulkProject @($Project1, $Project2)
+PS C:\> $UserAccount = [UserAccount]::new(@{first_name="Test";last_name="Test";email="test@gmail.com"})
+PS C:\> Import-UserAccount $UserAccount
 ```
 
 Example 2 is used when importing data already retrieved from Remarcable API service. This is preferable if data is simply being transformed, not made new.
 
 ## PARAMETERS
 
-### -Projects
-List of projects to import
+### -AccountUser
+Account User to import.
 
 ```yaml
-Type: Project[]
+Type: AccountUser
 Parameter Sets: (All)
 Aliases:
 
@@ -56,15 +54,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-List of the `Project` classes
+`UserAccount` class
 
 ## OUTPUTS
 
 ```json
 {
-    "detail": "We are processing your bulk import project request. If error occurs, you will get an email notification."
+    "id": 100123,
+    "first_name": "Joe",
+    "last_name": "Smith",
+    "email": "joe.smith@yourdomain.com",
+    "phone": "440-120-4309",
+    "employee_id": "JSS",
+    "company_branch_name": "Cleveland",
+    "user_group_name": "All Access",
 }
 ```
 
 ## RELATED LINKS
-https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=103
+https://www.remarcable.com/helpcenter?object_id=12&object_type=section&section_document_id=1301

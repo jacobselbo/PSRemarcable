@@ -26,7 +26,7 @@ PS C:\> Import-Project $Project
 
 ### Example 2
 ```powershell
-PS C:\> $Project = [Project]::new(@{project_name="Test";status="active";main_job_num="123832A"})
+PS C:\> $Project = New-Project -Raw @{project_name="Test";status="active";main_job_num="123832A"}
 PS C:\> Import-Project $Project
 ```
 
