@@ -11,7 +11,13 @@ class Serializable {
         $Result = @{}
 
         foreach ($Row in $this.Serialization.GetEnumerator()) {
-            $Result.($Row.Name) = $this.($Row.Value)
+            $Value = $this.($Row.Value)
+
+            if ($Value -is [mailaddress]) {
+                $Value = $Value.Address
+            }
+
+            $Result.($Row.Name) = $Value
         }
 
         return $Result

@@ -111,7 +111,13 @@ class Project {
                 } elseif ($SerializedName -eq "address") {
                     $Result.$SerializedName = $this.$ClassName.Serialize()
                 } else {
-                    $Result.$SerializedName = $this.$ClassName
+                    if ($this.$ClassName -is [mailaddress]) {
+                        $Result.$SerializedName = $this.$ClassName.Address
+                    } elseif ($this.$ClassName -is [mailaddress[]]) {
+                        $Result.$SerializedName = @($this.$ClassName | ForEach-Object { $_.Address })
+                    } else {
+                        $Result.$SerializedName = $this.$ClassName
+                    }
                 }
             }
         }

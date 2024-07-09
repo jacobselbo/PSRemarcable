@@ -4,16 +4,18 @@ class RemarcableClient {
     [datetime] $TokenRefreshTime
     [int] $HoursToRefresh = 8
     [string] $URI
+    [bool] $UsesAccountAPI = $false
 
     # Create token every 8 hours through user email and SSO password
     RemarcableClient($Email, [securestring] $Password, $URI) {
         $this.AccountCredential = [pscredential]::new($Email, $Password)
+        $this.UsesAccountAPI = $true
         $this.URI = $URI
     }
 
     # Use integration token
     RemarcableClient([securestring] $Token, $URI) {
-        $this.APICredential = [pscredential]::new("", $Token)
+        $this.APICredential = [pscredential]::new("NULL", $Token)
         $this.URI = $URI
     }
 
@@ -38,7 +40,7 @@ class RemarcableClient {
 
     # Checks if the API token needs to be refreshed, if so refreshes it
     [void] DoesAPITokenNeedRefresh() {
-        if ($null -ne $this.TokenRefreshTime -and (Get-Date) -ge ($this.TokenRefreshTime)) {
+        if ($this.UsesAccountAPI -and (Get-Date) -ge ($this.TokenRefreshTime)) {
             $this.RefreshAPIToken()
         }
     }
