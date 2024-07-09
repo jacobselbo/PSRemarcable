@@ -1,6 +1,4 @@
 Function New-RemarcableRequest {
-    [CmdletBinding()]
-    [OutputType([hashtable])]
     param (
         [Parameter(Mandatory)]
         [string]
@@ -9,9 +7,14 @@ Function New-RemarcableRequest {
         [Microsoft.PowerShell.Commands.WebRequestMethod]
         $Method,
         [hashtable]
-        $Parameters
+        $Parameters,
+
+        [switch]
+        $JSON
     )
     process {
+        $NewBody = $null -ne $Parameters ? $Parameters : @{}
+
         if ($null -eq $script:RemarcableClient) {
             Throw "Remarcable API Client has not yet been initalized. Please run Initialize-RemarcableClient and try again"
         }
@@ -21,19 +24,25 @@ Function New-RemarcableRequest {
 
         # Some API's use the new Authorization header, some still use it as a field
         $Token = $script:RemarcableClient.APICredential.GetNetworkCredential().Password
+        $NewBody.token = $Token
 
-        $Parameters.token = $Token
-        $Parameters.account_email = $script:RemarcableClient.APICredential.UserName
+        if ($script:RemarcableClient.UsesAccountAPI) {
+            $NewBody.account_email = $script:RemarcableClient.APICredential.UserName
+        }
 
         $Headers = @{
-            "content-type" = "application/json"
             "Authorization" = "token $($Token)"
         }
 
         $URI = "$($script:RemarcableClient.URI)$URI"
 
+        if ($JSON.IsPresent) {
+            $NewBody = $NewBody | ConvertTo-Json
+            $Headers["Content-Type"] = "application/json"
+        }
+
         return @{
-            Body = $Parameters
+            Body = $NewBody
             Method = $Method
             Uri = $URI
             Headers = $Headers
